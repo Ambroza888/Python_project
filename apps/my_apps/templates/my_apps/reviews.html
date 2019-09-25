@@ -1,0 +1,272 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'my_apps/css/bootstrap.css' %}">    
+        <script src="{% static 'my_apps/js/bootstrap.js' %}"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <style>
+    *{
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+    body html {
+      margin: 0;
+      padding: 0;
+    }
+    .truckimg {
+      background-image: url("{% static 'my_apps/images/truck.png' %}");
+      background-size: cover;
+      background-position: center center;
+      background-repeat:no-repeat;
+    }
+    .backgroundimg {
+      background-image: url("{% static 'my_apps/images/rating.jpg' %}");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      height: 600px;
+      background-attachment: fixed;
+    }
+    .logo {
+      background-image: url("{% static 'my_apps/images/logo.png' %}");
+      width: 100%;
+      height: 200px;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+    ul.social-network {
+	list-style: none;
+	display: inline;
+	margin-left:0 !important;
+	padding: 0;
+}
+ul.social-network li {
+	display: inline;
+	margin: 0 5px;
+}
+
+.social-network a.icoRss:hover {
+	background-color: #F56505;
+}
+.social-network a.icoFacebook:hover {
+	background-color:#3B5998;
+}
+.social-network a.icoTwitter:hover {
+	background-color:#33ccff;
+}
+.social-network a.icoGoogle:hover {
+	background-color:#BD3518;
+}
+.social-network a.icoVimeo:hover {
+	background-color:#0590B8;
+}
+.social-network a.icoLinkedin:hover {
+	background-color:#007bb7;
+}
+.social-network a.icoRss:hover i, .social-network a.icoFacebook:hover i, .social-network a.icoTwitter:hover i,
+.social-network a.icoGoogle:hover i, .social-network a.icoVimeo:hover i, .social-network a.icoLinkedin:hover i {
+	color:#fff;
+}
+a.socialIcon:hover, .socialHoverClass {
+	color:#44BCDD;
+}
+
+.social-circle li a {
+	display:inline-block;
+	position:relative;
+	margin:0 auto 0 auto;
+	-moz-border-radius:50%;
+	-webkit-border-radius:50%;
+	border-radius:50%;
+	text-align:center;
+	width: 50px;
+	height: 50px;
+	font-size:20px;
+	background-color: #D3D3D3;
+}
+.social-circle li i {
+	margin:0;
+	line-height:50px;
+	text-align: center;
+}
+
+.social-circle li a:hover i, .triggeredHover {
+	-moz-transform: rotate(360deg);
+	-webkit-transform: rotate(360deg);
+	-ms--transform: rotate(360deg);
+	transform: rotate(360deg);
+	-webkit-transition: all 0.2s;
+	-moz-transition: all 0.2s;
+	-o-transition: all 0.2s;
+	-ms-transition: all 0.2s;
+	transition: all 0.2s;
+}
+.social-circle i {
+	color: #fff;
+	-webkit-transition: all 0.8s;
+	-moz-transition: all 0.8s;
+	-o-transition: all 0.8s;
+	-ms-transition: all 0.8s;
+	transition: all 0.8s;
+}
+  
+  
+  </style>
+</head>
+<body {%if messages %} class="modal-open"  style="padding-right: 16px;"{%endif%}>
+
+    <header class="navbar-inverse">
+        <nav role="navigation">
+              <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container">
+                    <a class="col navbar-brand text-center" href="/">Home</a>
+                    <a class="col navbar-brand text-center" href="#">Gallery</a>
+                    <a class="col navbar-brand text-center" href="/contact">Contact us</a>
+                </nav>
+            </nav>
+    </header>
+    <div class="container">
+      <div class="row" >
+        <div class="col logo">
+            <h1 class="text-center" style="font-family:Arial, Helvetica, sans-serif">Imba Painting</h1>
+        </div>
+          <div class="col text-right">
+            <p class="p">Like us on:</p>
+              <div>
+                  <ul class="social-network social-circle">
+                    <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                    <li><a href="https://www.facebook.com/IMBA-Painting-106391344059591/" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                    <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                  </ul>
+                </div>
+              <h1 class="h1">Call: (206) 430-4773</h1>
+          </div>
+        </div>
+        <div class="row backgroundimg text-center">
+          <div class="col-2"></div>
+              <div class="col-8 align-self-center text-center">
+
+                <form action="/taking_review" method="POST">
+                  {% csrf_token %}
+                  {%if messages %} <div class="modal fade show" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: block; padding-right: 16px;" aria-modal="true"> 
+                    {% else %}
+                    <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" 
+                    aria-hidden="true">
+                    {% endif %}
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header text-center">
+                          <h4 class="modal-title w-100 font-weight-bold">Rate our Services</h4>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <a href="/reviews"aria-hidden="true" style="color: black">&times;</a>
+                          </button>
+                        </div>
+                        <div class="modal-body mx-3">
+                          <div class="row md-form mb-5">
+                            <input name="name" type="text" id="form34" class="col-9 form-control validate" placeholder="Your Name">
+                            <select class="col-3" name="rating">
+                                <option value="0">Rating</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                              </select>
+                          </div>
+                  
+                          <div class="row md-form">
+                            <textarea name="review_text" type="text" id="form8" class="md-textarea form-control" rows="6" placeholder="Your review here"></textarea>
+                          </div>
+                  
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                          <button class="btn btn-unique d-block">Send Review</button>
+                        </div>
+                        {% if messages %}
+                        <ul class="messages">    
+                            {% for message in messages %}    
+                                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="mt-5 text-center">
+                    <a href="" class="bg-light text-dark btn btn-lg btn-rounded mb-4" data-toggle="modal" data-target="#modalContactForm">Write a Review</a>
+                  </div>
+              </form>
+            </div>
+        </div>
+            {%for i in all_reviews%}
+            <div class="row mt-5 blockquote review-item">
+                <div class="col-md-3 text-center">
+                  <img class="rounded-circle reviewer" src="http://standaloneinstaller.com/upload/avatar.png">
+                  <div class="caption">
+                    <small>by {{i.name}}</small>
+                  </div>
+            
+                </div>
+                <div class="col-md-9">
+                  <h4><p>
+                      Rating
+                      {%if i.rating == 1 %}
+                      &#9733;&#9734;&#9734;&#9734;&#9734;
+                      {% endif %}
+                      {%if i.rating == 2 %}
+                      &#9733;&#9733;&#9734;&#9734;&#9734;
+                      {% endif %}
+                      {%if i.rating == 3 %}
+                      &#9733;&#9733;&#9733;&#9734;&#9734;
+                      {% endif %}
+                      {%if i.rating == 4 %}
+                      &#9733;&#9733;&#9733;&#9733;&#9734;
+                      {% endif %}
+                      {%if i.rating == 5 %}
+                      &#9733;&#9733;&#9733;&#9733;&#9733;
+                      {% endif %}
+                  </p></h4>
+                  <p class="review-text">{{i.text}}</p>
+                  <small class="review-date">{{i.created_at}}</small>
+                </div>                          
+              </div>
+              {%endfor%}
+          </div>
+        </div> 
+        
+
+
+      </div>
+      <footer class="page-footer blue">
+          <div class="text-light bg-dark footer-copyright text-center py-4">
+            <span class="col text-light">© 2018 Copyright: Business Pusher.com</span>
+            <a class="col text-light" href="#">Contact Us</a>
+          </div>
+        </footer>
+    
+      
+
+
+
+
+
+
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      {%if messages %}<div class="modal-backdrop fade show"></div>{%endif%}
+</body>
+</html>

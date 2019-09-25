@@ -1,0 +1,128 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'image_uploader/css/bootstrap.css' %}">    
+  <script src="{% static 'image_uploader/js/bootstrap.min.js' %}"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+<style>
+
+.btn:focus, .btn:active, button:focus, button:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+#image-gallery .modal-footer{
+  display: block;
+}
+
+.thumb{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.plx {
+      background-image: url("{% static 'image_uploader/images/maxresdefault.jpg' %}");
+      background-position: fixed;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+</style>
+</head>
+<body>
+
+
+
+
+
+
+
+          <nav class="inverse navbar navbar-expand-lg navbar-dark bg-dark">
+              <div class="col-2 navbar-brand"style='font-family:cursive'>Image Sharing.com</div>
+                    {%if request.session.user_id%}
+                <form class="col-2" action="/image/uploading_file" enctype="multipart/form-data" method="POST">
+                    {%csrf_token%}
+                    <input class="btn btn-success" type="file" name="document" onchange="this.form.submit()">
+                </form>
+                    {%endif%}
+            
+                    {%if request.session.user_id%}
+                <div class="col-8 text-right pr-4">
+                    <h3 class="d-inline-block text-white">Welcome {{user.name}}</h3>
+                    <button type="button" class="ml-2 btn btn-lg btn-white" disabled>
+                      <a class="text-dark" href="/image/clean_session">Log out</a>
+                    </button>
+                </div>
+                    {%else%}
+                <div class="col-10 pr-4 text-right">
+                    <button type="button" class="btn btn-lg btn-white" disabled>
+                      <a class="text-dark" href="/image/log_reg">Log in</a>
+                    </button>
+                </div>
+                    {%endif%}
+            </nav>
+
+          <section class="plx">
+            <div class="container">
+                <div class="row ml-5">
+                    <div class="ba-0 tp-s">
+                      {%for i in img%}
+                        <a data-target="#a{{i.id}}" data-toggle="modal" href="#" class="color-gray-darker td-hover-none">
+                          <img class="col-3 ml-5 mt-5 img-rounded" src="/media/{{i.image}}" alt="">
+                        </a>
+                        <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="a{{i.id}}" role="dialog" tabindex="-1">
+                          <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                              <div class="modal-body mb-0 p-0">
+                                <img class="p-5 img-rounded" src="/media/{{i.image}}" alt="" style="width:100%;">
+                              </div>
+                              <div class="modal-footer">
+                                <button class="btn btn-outline-primary btn-rounded btn-md ml-4 text-center" data-dismiss="modal" type="button">Close</button>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      {%endfor%}
+                    </div>
+                </div>
+            </div>	
+          </section>
+
+
+
+
+
+
+
+
+    <footer class="page-footer blue">
+      <div class="text-light bg-dark footer-copyright text-center py-4">
+        <span class="col text-light">© 2018 Copyright: Business Pusher.com</span>
+        <a class="col text-light" href="#">Contact Us</a>
+      </div>
+    </footer>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>
